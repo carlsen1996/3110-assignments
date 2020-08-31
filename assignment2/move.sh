@@ -13,7 +13,7 @@ move () {
 	fi
 
 	if [[ -d "$src" && -d "$dst" ]]; then
-		mv $src/* $dst
+		mv $src/* $dst && mv $src/.* $dst
 	else
 		echo "One of the directories does not exist"
 	fi

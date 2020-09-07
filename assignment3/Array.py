@@ -10,8 +10,15 @@ class Array:
         for value in self.values:
             if type(value) != fileType:
                 raise ValueError("The data types in the array are not the same")
-        if len(self.values) != self.shape[0]:
+        sum = 1
+        for i in self.shape:
+            sum = sum * i
+        
+        print(sum, len(self.values))
+        if len(self.values) != sum:
             raise ValueError("The number of values does not match the shape")
+        
+
 
 
         """
@@ -26,9 +33,13 @@ class Array:
         
 
     def __str__(self):
+        if len(self.shape) == 1:
+            return str(self.values).strip("()")
+        else:
+            for 
+            return str(self.values)
         
         
-        return str(self.values).strip("()")
         """Returns a nicely printable string representation of the array.
         Returns:
             str: A string representation of the array.
@@ -37,14 +48,15 @@ class Array:
 
     def __add__(self, other):
         if isinstance(other, (int, float)):
-            tmpShape = self.shape[0]
-            tmpShape = tmpShape + 1
-            self.shape = (tmpShape,)
+            tmpTup = ()
+            for value in self.value:
+                value = value + other
+                
             self.values = self.values + (other,)
             return self
         elif isinstance(other, Array):
             tmpShape = self.shape[0]
-            tmpShape = tmpShape + 1
+            tmpShape = tmpShape + other.shape[0]
             self.shape = (tmpShape,)
             self.values = self.values + other.values
             return self

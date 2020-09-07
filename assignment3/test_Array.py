@@ -65,26 +65,26 @@ assert my_array.min_element() == -1
 ## 2d-arrays
 #__add__
 shape = (3, 2)
-my_array = Array(shape, (1, 2), (3, 2), (2, 4))
-assert my_array + (3, 1) == ((1, 2), (3, 2), (2, 4), (3, 1))
-assert (4, 1) + my_array == ((1, 2), (3, 2), (2, 4), (3, 1), (4, 1))
+my_array = Array(shape, 1, 2, 3, 2, 2, 4)
+assert my_array + (3, 1) == (1, 2, 3, 2, 2, 4, 3, 1)
+assert (4, 1) + my_array == (1, 2, 3, 2, 2, 4, 3, 1, 4, 1)
 
 #__sub__
-assert my_array - (4, 1) == ((1, 2), (3, 2), (2, 4), (3, 1))
+assert my_array - (4, 1) == (1, 2, 3, 2, 2, 4, 3, 1)
 
 #__eq__
 shape = (3, 2)
-tmp_array = Array(shape, (3, 2), (4, 1), (2, 5))
+tmp_array = Array(shape, 3, 2, 4, 1, 2, 5)
 assert (my_array == tmp_array) == False
 tmp_array + (2, 3)
 assert (my_array == tmp_array) == True
 
 # is_equal()
 shape = (4, 2)
-tmp_array = Array(shape, (1, 2), (3, 2), (2, 4), (3, 1))
-assert my_array.is_equal(tmp_array) == Array(shape, (True, True), (True, True), (True, True), (True, True))
-tmp_array = Array(shape, (1, 4), (2, 2), (1, 4), (5, 2))
-assert my_array.is_equal(tmp_array) == Array(shape, (True, False), (False, True), (False, True), (False, False))
+tmp_array = Array(shape, 1, 2, 3, 2, 2, 4, 3, 1)
+assert my_array.is_equal(tmp_array) == Array(shape, True, True, True, True, True, True, True, True)
+tmp_array = Array(shape, 1, 4, 2, 2, 1, 4, 5, 2)
+assert my_array.is_equal(tmp_array) == Array(shape, True, False, False, True, False, True, False, False)
 
 # mean()
 assert my_array.mean() == (1 + 4 + 2 + 2 + 1 + 4 + 5 + 2) / 8

@@ -1,9 +1,11 @@
+from copy import deepcopy
+
 class Array:
     # Assignment 3.3  
 
     def __init__(self, shape, *values):
         self.shape = shape
-        self.values = (values)
+        self.values = values
         fileType = type(self.values[0])
         for value in self.values:
             if type(value) != fileType:
@@ -26,7 +28,7 @@ class Array:
     def __str__(self):
         
         
-        return str(self.values)
+        return str(self.values).strip("()")
         """Returns a nicely printable string representation of the array.
         Returns:
             str: A string representation of the array.
@@ -39,11 +41,13 @@ class Array:
             tmpShape = tmpShape + 1
             self.shape = (tmpShape,)
             self.values = self.values + (other,)
+            return self
         elif isinstance(other, Array):
             tmpShape = self.shape[0]
             tmpShape = tmpShape + 1
             self.shape = (tmpShape,)
             self.values = self.values + other.values
+            return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")
 
@@ -59,7 +63,7 @@ class Array:
         
 
     def __radd__(self, other):
-        self + other
+        return self + other
         """Element-wise adds Array with another Array or number.
         If the method does not support the operation with the supplied arguments
         (specific data type or shape), it should return NotImplemented.
@@ -80,6 +84,7 @@ class Array:
                 if value != other:
                     tmpTup = tmpTup + (value,)
             self.values = tmpTup
+            return self
 
             
         elif isinstance(other, Array):
@@ -93,6 +98,7 @@ class Array:
                         
             self.values = tmpTup
             self.shape = (tmpShape,)
+            return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")
 
@@ -107,7 +113,7 @@ class Array:
         
 
     def __rsub__(self, other):
-        other - self
+        return other - self
         """Element-wise subtracts this Array from a number or Array.
         If the method does not support the operation with the supplied arguments
         (specific data type or shape), it should return NotImplemented.
@@ -123,7 +129,10 @@ class Array:
         for value in self.values:
             value = value * other
             tmpTup = tmpTup + (value,)
-        self.values = tmpTup
+        tmpArr = self
+        tmpArr.shape = (len(tmpTup),)
+        tmpArr.values = tmpTup
+        return tmpArr
         """Element-wise multiplies this Array with a number or array.
         If the method does not support the operation with the supplied arguments
         (specific data type or shape), it should return NotImplemented.
@@ -135,7 +144,7 @@ class Array:
         
 
     def __rmul__(self, other):
-        self * other
+        return self * other
         """Element-wise multiplies this Array with a number or array.
         If the method does not support the operation with the supplied arguments
         (specific data type or shape), it should return NotImplemented.
@@ -164,22 +173,24 @@ class Array:
         
 
     def is_equal(self, other):
-        boolArr = ()
+        booltup = ()
         if self == other:
             for i in range(0, self.shape[0]):
                 if self.values[i] != other.values[i]:
-                    boolArr = boolArr + (False,)
+                    booltup = booltup + (False,)
                 else:
-                    boolArr = boolArr + (True,)
+                    booltup = booltup + (True,)
         elif isinstance(other, (int, float)):
             for value in self.values:
                 if value == other:
-                    boolArr = boolArr + (True,)
+                    booltup = booltup + (True,)
                 else:
-                    boolArr = boolArr + (False,)
+                    booltup = booltup + (False,)
         else:
             if isinstance(other, Array):
                 raise ValueError("the two array shapes does not match")
+        boolArr = deepcopy(self)
+        boolArr.values = booltup
         return boolArr
         
         """Compares an Array element-wise with another Array or number.
@@ -211,10 +222,14 @@ class Array:
         
 
     def variance(self):
+
+        """
         total = 0
         for value in self.values:
             total = total + value
         var = 
+        """
+
         """Computes the variance of the array
         Only needs to work for numeric data types.
         The variance is computed as: mean((x - x.mean())**2)

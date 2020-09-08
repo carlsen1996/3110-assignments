@@ -14,7 +14,7 @@ class Array:
         for i in self.shape:
             sum = sum * i
         
-        print(sum, len(self.values))
+        
         if len(self.values) != sum:
             raise ValueError("The number of values does not match the shape")
         
@@ -36,7 +36,6 @@ class Array:
         if len(self.shape) == 1:
             return str(self.values).strip("()")
         else:
-            for 
             return str(self.values)
         
         
@@ -49,16 +48,19 @@ class Array:
     def __add__(self, other):
         if isinstance(other, (int, float)):
             tmpTup = ()
-            for value in self.value:
+            for value in self.values:
                 value = value + other
-                
-            self.values = self.values + (other,)
+                tmpTup = tmpTup + (value,)
+            self.values = tmpTup
             return self
         elif isinstance(other, Array):
-            tmpShape = self.shape[0]
-            tmpShape = tmpShape + other.shape[0]
-            self.shape = (tmpShape,)
-            self.values = self.values + other.values
+            i = 0
+            tmpTup = ()
+            for value in self.values:
+                value = value + other.values[i]
+                i = i + 1
+                tmpTup = tmpTup + (value,)
+            self.values = tmpTup
             return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")
@@ -88,28 +90,23 @@ class Array:
 
     def __sub__(self, other):
         if isinstance(other, (int, float)):
-            tmpShape = self.shape[0]
-            tmpShape = tmpShape - 1
-            self.shape = (tmpShape,)
+            
             tmpTup = ()
             for value in self.values:
-                if value != other:
-                    tmpTup = tmpTup + (value,)
+                value = value - other
+                tmpTup = tmpTup + (value,)
             self.values = tmpTup
             return self
 
             
         elif isinstance(other, Array):
-            tmpShape = 0
+            i = 0
             tmpTup = ()
             for value in self.values:
-                if value not in other.values:
-                    tmpTup = tmpTup + (value,)
-                    tmpShape = tmpShape + 1
-                    
-                        
+                value = value - other.values[i]
+                i = i + 1
+                tmpTup = tmpTup + (value,)
             self.values = tmpTup
-            self.shape = (tmpShape,)
             return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")

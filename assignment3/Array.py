@@ -33,17 +33,17 @@ class Array:
         
 
     def __str__(self):
-        if len(self.shape) == 1:
-            return str(self.values).strip("()")
-        else:
-            return str(self.values)
+        
+        return str(self.values).strip("()")
+        
         
         
         """Returns a nicely printable string representation of the array.
         Returns:
             str: A string representation of the array.
         """
-        
+    
+
 
     def __add__(self, other):
         if isinstance(other, (int, float)):
@@ -54,17 +54,37 @@ class Array:
             self.values = tmpTup
             return self
         elif isinstance(other, Array):
+            if self.shape == other.shape:
+                i = 0
+                tmpTup = ()
+                for value in self.values:
+                    value = value + other.values[i]
+                    i = i + 1
+                    tmpTup = tmpTup + (value,)
+                self.values = tmpTup
+                return self
+            else:
+                raise ValueError("the shapes does not match")
+            
+        elif isinstance(other, tuple):
             i = 0
-            tmpTup = ()
-            for value in self.values:
-                value = value + other.values[i]
-                i = i + 1
-                tmpTup = tmpTup + (value,)
+            if isinstance(other[0], (int, float)):
+                tmpTup = ()
+                while i < len(self.values):
+                    for value in other:
+                        val = self.values[i] + value
+                        tmpTup = tmpTup + (val,)
+                        i = i + 1
             self.values = tmpTup
             return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")
+        
+        
 
+                
+
+            
 
         """Element-wise adds Array with another Array or number.
         If the method does not support the operation with the supplied arguments
@@ -90,22 +110,34 @@ class Array:
 
     def __sub__(self, other):
         if isinstance(other, (int, float)):
-            
             tmpTup = ()
             for value in self.values:
                 value = value - other
                 tmpTup = tmpTup + (value,)
             self.values = tmpTup
             return self
-
-            
         elif isinstance(other, Array):
+            if self.shape == other.shape:
+                i = 0
+                tmpTup = ()
+                for value in self.values:
+                    value = value - other.values[i]
+                    i = i + 1
+                    tmpTup = tmpTup + (value,)
+                self.values = tmpTup
+                return self
+            else:
+                raise ValueError("The shapes does not match")
+            
+        elif isinstance(other, tuple):
             i = 0
-            tmpTup = ()
-            for value in self.values:
-                value = value - other.values[i]
-                i = i + 1
-                tmpTup = tmpTup + (value,)
+            if isinstance(other[0], (int, float)):
+                tmpTup = ()
+                while i < len(self.values):
+                    for value in other:
+                        val = self.values[i] - value
+                        tmpTup = tmpTup + (val,)
+                        i = i + 1
             self.values = tmpTup
             return self
         else:
@@ -184,7 +216,7 @@ class Array:
     def is_equal(self, other):
         booltup = ()
         if self == other:
-            for i in range(0, self.shape[0]):
+            for i in range(0, len(self.values)):
                 if self.values[i] != other.values[i]:
                     booltup = booltup + (False,)
                 else:
@@ -222,7 +254,7 @@ class Array:
                 total = total + value
             else:
                 raise ValueError("not numeric types in the array")
-        return total / self.shape[0]
+        return total / len(self.values)
         """Computes the mean of the array
         Only needs to work for numeric data types.
         Returns:

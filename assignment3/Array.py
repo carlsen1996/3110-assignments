@@ -330,7 +330,7 @@ class Array:
         Returns:
             float: The mean of the array values.
         """
-        pass
+
 
     def min_element(self):
         """This finds the smallest value in the array"""

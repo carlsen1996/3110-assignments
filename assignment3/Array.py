@@ -22,16 +22,11 @@ class Array:
         This builds up a 2-dimentional tuple to be able to print it out and use the __getitem__ function properly
         It builds up tuples and adding the thuples in other tuples so it looks properly
         """
+        
         if len(self.shape) > 1:
-            count = 0
-            self.twoDTup = ()
-            for i in range(0, self.shape[0]):
-                tmpTup1 = ()
-                for j in range(0, self.shape[1]):
-                    tmpTup1 = tmpTup1 + (self.values[count],)
-                    count = count + 1
-                self.twoDTup = self.twoDTup + (tmpTup1,)
-            
+            self.build()
+    
+        
 
         
         
@@ -45,6 +40,16 @@ class Array:
             ValueError: If the values are not all of the same type.
             ValueError: If the number of values does not fit with the shape.
         """
+    def build(self):
+        """This builds up a 2-dimentional array when needed. Didnt manage to make so it works for n-dimentional arrays"""
+        count = 0
+        self.twoDTup = ()
+        for i in range(0, self.shape[0]):
+            tmpTup1 = ()
+            for j in range(0, self.shape[1]):
+                tmpTup1 = tmpTup1 + (self.values[count],)
+                count = count + 1
+            self.twoDTup = self.twoDTup + (tmpTup1,)
         
 
     def __str__(self):
@@ -52,9 +57,9 @@ class Array:
         if len(self.shape) == 1:
             return str(self.values).strip("()")
         else:
-            #return str(self.twoDTup)
-            return str(self.values).strip("()")
-            
+            return str(self.twoDTup)
+            #return str(self.values).strip("()")
+
 
         
         
@@ -86,6 +91,8 @@ class Array:
                 value = value + other
                 tmpTup = tmpTup + (value,)
             self.values = tmpTup
+            if len(self.shape) > 1:
+                    self.build()
             return self
         elif isinstance(other, Array):
             """This takes in an array and adds the number from the same places in the arrays"""
@@ -97,11 +104,13 @@ class Array:
                     i = i + 1
                     tmpTup = tmpTup + (value,)
                 self.values = tmpTup
+                if len(self.shape) > 1:
+                    self.build()
                 return self
             else:
                 raise ValueError("the shapes does not match")
             
-        
+            
         else:
             raise NotImplementedError("The values you are adding is not implemented")
         
@@ -142,6 +151,8 @@ class Array:
                 value = value - other
                 tmpTup = tmpTup + (value,)
             self.values = tmpTup
+            if len(self.shape) > 1:
+                    self.build()
             return self
         elif isinstance(other, Array):
             if self.shape == other.shape:
@@ -152,21 +163,12 @@ class Array:
                     i = i + 1
                     tmpTup = tmpTup + (value,)
                 self.values = tmpTup
+                if len(self.shape) > 1:
+                    self.build()
                 return self
             else:
                 raise ValueError("The shapes does not match")
             
-        elif isinstance(other, tuple):
-            i = 0
-            if isinstance(other[0], (int, float)):
-                tmpTup = ()
-                while i < len(self.values):
-                    for value in other:
-                        val = self.values[i] - value
-                        tmpTup = tmpTup + (val,)
-                        i = i + 1
-            self.values = tmpTup
-            return self
         else:
             raise NotImplementedError("The values you are adding is not implemented")
 
@@ -200,16 +202,18 @@ class Array:
             for value in self.values:
                 value = value * other
                 tmpTup = tmpTup + (value,)
-            tmpArr = self
-            tmpArr.shape = (len(tmpTup),)
-            tmpArr.values = tmpTup
-            return tmpArr
+            self.values = tmpTup
+            if len(self.shape) > 1:
+                self.build()
+            return self
         elif isinstance(other, Array):
             i = 0
             if self == other:
                 for value in self.values:
                     value = value * other.values[i]
                     i = i + 1
+                if len(self.shape) > 1:
+                    self.build()
                 return self
             else:
                 raise ValueError("the shapes does not match")

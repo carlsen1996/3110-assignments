@@ -74,18 +74,19 @@ shape = (3, 2)
 my_array = Array(shape, 1, 2, 3, 2, 2, 4)
 my_array + 3
 
-assert my_array.__str__() == "4, 5, 6, 5, 5, 7"
+
+
+assert my_array.__str__() == "((4, 5), (6, 5), (5, 7))"
 4 + my_array
 
-assert my_array.__str__() == "8, 9, 10, 9, 9, 11"
+assert my_array.__str__() == "((8, 9), (10, 9), (9, 11))"
 
 #__sub__
 my_array - 3
-
-assert my_array.__str__() == "5, 6, 7, 6, 6, 8"
+assert my_array.__str__() == "((5, 6), (7, 6), (6, 8))"
 tmp_array = Array(shape, 2, 1, 4, 1, 3, 2)
 my_array - tmp_array
-assert my_array.__str__() == "3, 5, 3, 5, 3, 6"
+assert my_array.__str__() == "((3, 5), (3, 5), (3, 6))"
 
 
 #__eq__

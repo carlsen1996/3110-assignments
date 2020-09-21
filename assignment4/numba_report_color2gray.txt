@@ -1,0 +1,6 @@
+Timing: numba_color2gray
+Average runtime running numba_color2gray after 3 runs: 0.05342937833332447
+Average runtime running of numba_color2gray is 35.8320677322761 times faster than python_color2gray
+Average runtime running of numba_color2gray is 0.15947654516316945 times slower than numpy_color2gray
+Timing performed using: time.perf_counter()
+The dimentions of the image is (400, 600, 3)

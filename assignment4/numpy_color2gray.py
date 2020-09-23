@@ -5,7 +5,9 @@ import time
 def numpy_color2gray(img):
     img = np.dot(img[...,:3], [0.21, 0.72, 0.07])
     img = img.astype("uint8")
-    cv2.imwrite("nprain_grey.jpg", img)
+    return img
+    
+    
 
 img = cv2.imread('/home/carls/Documents/IN3110-johancb/assignment4/rain.jpg')
 
@@ -14,7 +16,8 @@ img = cv2.imread('/home/carls/Documents/IN3110-johancb/assignment4/rain.jpg')
 avg = 0
 for i in range(3):
     tic = time.perf_counter()
-    numpy_color2gray(img)
+    grey = numpy_color2gray(img)
+    cv2.imwrite("nprain_grey.jpg", grey)
     toc = time.perf_counter()
     dur = toc - tic
     avg += dur

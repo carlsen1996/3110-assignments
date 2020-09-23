@@ -7,7 +7,8 @@ def numpy_color2sepia(img):
     img = img.dot(sepia_array.T)
     img[img > 255] = 255
     img = img.astype("uint8")
-    cv2.imwrite("nprain_sepia.jpg", img)
+    return img
+    
 
 img = cv2.imread('/home/carls/Documents/IN3110-johancb/assignment4/rain.jpg')
 
@@ -16,10 +17,12 @@ img = cv2.imread('/home/carls/Documents/IN3110-johancb/assignment4/rain.jpg')
 avg = 0
 for i in range(3):
     tic = time.perf_counter()
-    numpy_color2sepia(img)
+    sepia = numpy_color2sepia(img)
+    cv2.imwrite("nprain_sepia.jpg", sepia)
     toc = time.perf_counter()
     dur = toc - tic
     avg += dur
+
 
 avg = avg / 3
 pf = open("python_report_color2sepia.txt", "r")

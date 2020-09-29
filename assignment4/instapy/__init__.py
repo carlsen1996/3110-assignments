@@ -1,6 +1,7 @@
-from numpy_color2gray import numpy_color2gray
-from numpy_color2sepia import numpy_color2sepia
+import numpy_color2gray
+import numpy_color2sepia
 import cv2
+
 
 def grayscale_image(input_filename, output_filename=None):
     img = cv2.imread(input_filename)

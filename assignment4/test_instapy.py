@@ -4,17 +4,6 @@ import cv2
 import numpy as np
 img = cv2.imread('./rain.jpg')
 
-# def test_gray_with_output():
-#     instapy.grayscale_image(img, "/home/carls/Documents/test_output_grey.jpg")
-
-# def test_gray_without_output():
-#     instapy.grayscale_image(img)
-
-# def test_sepia_with_output():
-#     instapy.sepia_image(img, "test_output_sepia.jpg")
-
-# def test_sepia_without_output():
-#     instapy.sepia_image(img)
 
 def test_grey_shape():
     grey = ipg.grayscale_image("numpy", img)

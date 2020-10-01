@@ -3,6 +3,12 @@ import cv2
 import time
 
 def numpy_color2gray(img):
+    """this function uses numpy to change a picture from normal colors to gray
+    Args: 
+        img (array): This takes in a array of a picture
+    returns:
+        array: This returns a array of a picture where all the values is changed to be grayscale
+    """
     img = np.dot(img[...,:3], [0.21, 0.72, 0.07])
     img[img > 255] = 255
     img = img.astype("uint8")
@@ -10,6 +16,9 @@ def numpy_color2gray(img):
     
     
 def test_time():
+    """This tests the time of the function and creates a file of some descriptions. it also write the image to a 
+    file in the output folder
+    """
     img = cv2.imread('./rain.jpg')
 
         

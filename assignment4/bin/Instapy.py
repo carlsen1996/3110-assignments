@@ -3,6 +3,8 @@ from instapy import grayscale_image as ipg
 from instapy import sepia_image as ips
 import cv2
 
+"""This module will take in user agruments to make different changes to a picture"""
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file', type=str)
@@ -18,6 +20,7 @@ args = parser.parse_args()
 if args.file == None:
     parser.print_help()
     exit(0)
+    
 img = cv2.imread(args.file)
 
 if args.scale != None:

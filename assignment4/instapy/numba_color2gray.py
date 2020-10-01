@@ -2,8 +2,16 @@ from numba import jit
 import cv2
 import time
 
+
+
 @jit(nopython=True)
 def numba_color2gray(img):
+    """this function uses numba to change a picture from normal colors to grayscale
+    Args: 
+        img (array): This takes in a array of a picture
+    returns:
+        array: This returns a array of a picture where all the values is changed to be grayscale
+    """
     for y in img:
         for z in y:
             red = z[0] * 0.21
@@ -18,12 +26,15 @@ def numba_color2gray(img):
 
     
 def test_time():
+    """This tests the time of the function and creates a file of some descriptions. it also write the image to a 
+    file in the output folder
+    """
     img = cv2.imread('./rain.jpg')    
 
     avg = 0
     for i in range(3):
         tic = time.perf_counter()
-        python_color2gray(img)
+        numba_color2gray(img)
         toc = time.perf_counter()
         dur = toc - tic
         avg += dur

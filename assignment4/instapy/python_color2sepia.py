@@ -2,6 +2,12 @@ import cv2
 import time
 
 def python_color2sepia(img):
+    """this function uses only native python to change a picture from normal colors to sepia
+    Args: 
+        img (array): This takes in a array of a picture
+    returns:
+        array: This returns a array of a picture where all the values is changed to be sepia
+    """
     for y in img:
         for z in y:
             red = z[0] * 0.393 + z[1] * 0.769 + z[2] * 0.189
@@ -26,6 +32,9 @@ def python_color2sepia(img):
     
 
 def test_time():    
+    """This tests the time of the function and creates a file of some descriptions. it also write the image to a 
+    file in the output folder
+    """
 
     avg = 0
     for i in range(3):

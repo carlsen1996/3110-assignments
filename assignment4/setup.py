@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="instapy_johancb6", 
-    version="0.0.1",
+    name="instapy_johancb", 
+    version="0.0.3",
     author="johancb",
     author_email="johancb@uio.no",
     description="a package for changing colors for pictures",

@@ -9,3 +9,5 @@ This will output a picture thats grayscale and called grayscale_image.jpg thats 
 
 
 The packages version is 0.0.3 so use that to get the right output.
+
+the dependencies are opencv-python and numpy

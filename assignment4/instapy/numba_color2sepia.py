@@ -2,6 +2,7 @@ from numba import jit
 import cv2
 import time
 
+
 @jit(nopython=True)
 def numba_color2sepia(img):
     """this function uses numba to change a picture from normal colors to sepia
@@ -21,23 +22,20 @@ def numba_color2sepia(img):
                 green = 255
             if blue > 255:
                 blue = 255
-            
+
             z[0] = blue
             z[1] = green
             z[2] = red
     return img
 
 
-    
-
-   
 def test_time():
     """This tests the time of the function and creates a file of some descriptions. it also write the image to a 
     file in the output folder
     """
     avg = 0
     for i in range(3):
-        img = cv2.imread('./rain.jpg') 
+        img = cv2.imread('./rain.jpg')
         tic = time.perf_counter()
         numba_color2sepia(img)
         toc = time.perf_counter()
@@ -63,5 +61,6 @@ def test_time():
     pf.close()
 
     f = open("./output/numba_report_color2sepia.txt", "w")
-    f.write(f"Timing: numba_color2sepia\nAverage runtime running numba_color2sepia after 3 runs: {avg}\nAverage runtime running of numba_color2sepia is {pyfas} times faster than python_color2sepia\nAverage runtime running of numba_color2sepia is {npfas} times slower than numpy_color2sepia\nTiming performed using: time.perf_counter()\nThe dimentions of the image is {img.shape}")
+    f.write(
+        f"Timing: numba_color2sepia\nAverage runtime running numba_color2sepia after 3 runs: {avg}\nAverage runtime running of numba_color2sepia is {pyfas} times faster than python_color2sepia\nAverage runtime running of numba_color2sepia is {npfas} times slower than numpy_color2sepia\nTiming performed using: time.perf_counter()\nThe dimentions of the image is {img.shape}")
     f.close()

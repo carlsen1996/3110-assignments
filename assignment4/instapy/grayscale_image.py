@@ -14,7 +14,6 @@ def grayscale_image(implement, img, output_filename=None):
         array: It returns an array of the changed picture
     """
 
-    
     if implement == "numpy":
         gray = npg.numpy_color2gray(img)
     elif implement == "python":
@@ -22,7 +21,7 @@ def grayscale_image(implement, img, output_filename=None):
     elif implement == "numba":
         gray = nbg.numba_color2gray(img)
 
-    if output_filename != None:
+    if output_filename is not None:
         cv2.imwrite(output_filename, gray)
     else:
         cv2.imwrite("output_grey.jpg", gray)

@@ -3,7 +3,6 @@ import cv2
 import time
 
 
-
 @jit(nopython=True)
 def numba_color2gray(img):
     """this function uses numba to change a picture from normal colors to grayscale
@@ -24,12 +23,11 @@ def numba_color2gray(img):
     return img
 
 
-    
 def test_time():
     """This tests the time of the function and creates a file of some descriptions. it also write the image to a 
     file in the output folder
     """
-    img = cv2.imread('./rain.jpg')    
+    img = cv2.imread('./rain.jpg')
 
     avg = 0
     for i in range(3):
@@ -58,6 +56,6 @@ def test_time():
     pf.close()
 
     f = open("./output/numba_report_color2gray.txt", "w")
-    f.write(f"Timing: numba_color2gray\nAverage runtime running numba_color2gray after 3 runs: {avg}\nAverage runtime running of numba_color2gray is {pyfas} times faster than python_color2gray\nAverage runtime running of numba_color2gray is {npfas} times slower than numpy_color2gray\nTiming performed using: time.perf_counter()\nThe dimentions of the image is {img.shape}")
+    f.write(
+        f"Timing: numba_color2gray\nAverage runtime running numba_color2gray after 3 runs: {avg}\nAverage runtime running of numba_color2gray is {pyfas} times faster than python_color2gray\nAverage runtime running of numba_color2gray is {npfas} times slower than numpy_color2gray\nTiming performed using: time.perf_counter()\nThe dimentions of the image is {img.shape}")
     f.close()
-

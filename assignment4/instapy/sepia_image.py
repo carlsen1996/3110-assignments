@@ -22,7 +22,7 @@ def sepia_image(implement, img, output_filename=None):
         sepia = nbs.numba_color2sepia(img)
         
     sepia = nps.numpy_color2sepia(img)
-    if output_filename != None:
+    if output_filename is not None:
         cv2.imwrite(output_filename, sepia)
     else:
         cv2.imwrite("output_sepia.jpg", sepia)

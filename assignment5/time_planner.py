@@ -2,7 +2,24 @@ from bs4 import BeautifulSoup
 import requests as req
 import re
 
+"""
+This program takes a wikipedia article with a table and takes out the date, venue and 
+dicipline and makes a markdown table out of it. This table will be used for betting and 
+has a winner colums that you can fill inn yourself
+"""
+
 def extract_events(url):
+    """
+    This function takes in a url for a wikipedia article with a table and makes a list of 
+    all the dates, venues and diciplines out of the html.
+
+    parameters:
+        url (String): This is a string of a url for a wikipedia article
+    
+    returns:
+        table_list (List): This is a list of lists where the inner list have three elements 
+                           which are date, venue and dicipline
+    """
     table_list = []
     
     soup = BeautifulSoup(url.text, "html.parser")
@@ -53,6 +70,14 @@ def extract_events(url):
     return table_list
             
 def make_table(table_list):
+    """
+    This function takes in a list of lists of elements and makes a table which can be 
+    read with the markdown formating language.
+
+    parameters:
+        table_list (List): This is a list of lists where the inner list have three elements 
+                           which are date, venue and dicipline
+    """
     f = open("./datetime_filter/betting_slip_empty.md", "w+")
     f.write("Date | Venue | Dicipline | Winner \n")
     f.write("--- | --- | --- | ---\n")

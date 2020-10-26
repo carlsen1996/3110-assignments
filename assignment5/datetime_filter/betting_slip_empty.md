@@ -2,11 +2,6 @@ Date | Venue | Dicipline | Winner
 --- | --- | --- | ---
 18 October 2020 | Sölden | GS | 
 14 November 2020 | Lech | PG | 
-28 November 2020 | Lake Louise | DH | 
-29 November 2020 | Lake Louise | SG | 
-4 December 2020 | Beaver Creek | SG | 
-5 December 2020 | Beaver Creek | DH | 
-6 December 2020 | Beaver Creek | GS | 
 5 December 2020 | Val-d'Isère | GS | 
 6 December 2020 | Val-d'Isère | GS | 
 12 December 2020 | Val-d'Isère | DH | 

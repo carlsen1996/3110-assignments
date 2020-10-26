@@ -14,3 +14,6 @@ Description of the regex:
             \/wiki\/                # This always have to be a part of the string  
                 [\w()/%]+           # This lets all the next characters be a letter, number, _, (, ), or % and repeats until next part  
                     (?=\"|#))       # This part is a positive lookahead which means the last part will go until it fins a "
+
+### 5.4
+To run this program you have to write "python3 time_planner.py" in your terminal

@@ -1,13 +1,29 @@
 from bs4 import BeautifulSoup
 import requests as req
 import matplotlib.pyplot as plt
+"""
+This program will take use a wikipedia article about a season of the NBA playoffs 
+and find all the teams in the conference semifinals. Then it will find all the 
+players in those teams and rank them after points per game, blocks per game and 
+rebounds per game and put it in a bar chart. Then it will save it as a png picture.
+"""
 
 def extract_url(url):
+    """
+    This function will take in a string thats a url and get out the team names and
+    save it in a list.
+
+    parameters:
+        url (String): A string of a url linking to a season of the NBA playoffs.
+
+    returns:
+        team_list (List): A list containing a list of urls to the teams in the semifinals.
+    """
     soup = BeautifulSoup(url.text, "html.parser")
     souptable = soup.find('div', {'class': "mw-parser-output"})
     body = souptable.find_all('tbody')
     line = body[5].find_all('tr')
-    team_line_arr = [4, 6, 16, 18, 28, 30, 40, 42]
+    team_line_arr = [4, 6, 16, 18, 28, 30, 40, 42] #this i counted myself because i dont know how else i would distiguish between the rows
     team_list = []
     for i in team_line_arr:
         column = line[i].find_all('td')[3].a['href']
@@ -16,7 +32,19 @@ def extract_url(url):
     return team_list
     
 def extract_player_url(team_list):
+    """
+    This function will take in a list of teams and find all the players playing 
+    that year. It will then save all those players and their wikipedia urls to 
+    a list.
+
+    parameters:
+        team_list (List): A list containining a list of urls to the teams in the semifinals.
     
+    returns:
+        team_players (Dictionary): A dictionary where the key is the name of the team 
+                                   and the values is a list of names of names of players
+                                   and their urls.
+    """
     team_players = {}
     for team in team_list:
         player_list = []
@@ -32,6 +60,18 @@ def extract_player_url(team_list):
     return team_players
 
 def extract_player_statistics(player_url):
+    """
+    This function will take in player urls and find their statistics for that year 
+    and return them. Its using try because the tables are not all the same and will
+    return errors if not handled properly.
+
+    parameters:
+        player_url (String): A string of a url of a player.
+    
+    returns:
+        stats (List): A list containing the name of the player and a list of 
+                      the required stats in floats.
+    """
     stats = []
     player_html = req.get(player_url)
     soup = BeautifulSoup(player_html.text, "html.parser")
@@ -43,98 +83,121 @@ def extract_player_statistics(player_url):
             if souptable.find_all("tr")[i].a != None:
                 if "2019–20" in souptable.find_all("tr")[i].a["title"] or "2019" in souptable.find_all("tr")[i].a["title"]:
                     row = souptable.find_all('tr')[i].find_all('td')
-                    # print(row[12].text.strip("\n"))
                     ppg = row[12].text.strip("\n")
                     bpg = row[11].text.strip("\n")
                     rbg = row[8].text.strip("\n")
                     stats = [float(ppg), float(bpg), float(rbg)]
                     
-                    # print(souptable.find_all("tr")[i].a["title"])
             
     except:
         souptable = soup.find('div', {'class': 'mw-parser-output'}).find_all('table')[1]
         for i in range(len(souptable.find_all("tr"))):
             if souptable.find_all("tr")[i].a != None:
-                # print(souptable.find_all("tr")[i].a)
                 if "2019–20" in souptable.find_all("tr")[i].a["title"] or "2019" in souptable.find_all("tr")[i].a["title"]:
                     row = souptable.find_all('tr')[i].find_all('td')
-                    # print(row[12].text.strip("\n"))
                     ppg = row[12].text.strip("\n")
                     bpg = row[11].text.strip("\n")
                     rbg = row[8].text.strip("\n")
                     stats = [float(ppg), float(bpg), float(rbg)]
-                    
-                    
-                    # print(souptable.find_all("tr")[i].a["title"])
+
     try:
         if stats == []:
             souptable = soup.find('div', {'class': 'mw-parser-output'}).find_all('table')[3]
             for i in range(len(souptable.find_all("tr"))):
                 if souptable.find_all("tr")[i].a != None:
-                    # print(souptable.find_all("tr")[i].a)
                     if "2019–20" in souptable.find_all("tr")[i].a["title"]:
                         row = souptable.find_all('tr')[i].find_all('td')
-                        # print(row[12].text.strip("\n"))
                         ppg = row[12].text.strip("\n")
                         bpg = row[11].text.strip("\n")
                         rbg = row[8].text.strip("\n")
                         stats = [float(ppg), float(bpg), float(rbg)]
     except:
         pass
-    stats = [name.strip(" (Basketball)"), stats]
+    stats = [name.strip(" (Basketball)"), stats] #strips the extra string describing the name
     return stats
 
+def plot(top_players, typep):
+    """
+    This function takes in the three top players of each team at a spesific stat and 
+    plots it in a bar diagram using pyplot. It saves the png files in the folder 
+    NBA_player_statistics.
 
-    
+    parameters:
+        top_players (List): This is a list of dictionaries where the keys are the name 
+                            of the team and the values are a list of the player name 
+                            and a list of the stats.
 
+        typep (String): A string determening what kind of stats the players are sorted
+                        after. (ppg, bpg, rbg)
+    returns: 
+        None
+    """
+    points = []
+    labels = []
+    for team_stat in top_players:
+        for name in team_stat:
+            for players in team_stat.values():
+                for player in players:
+                    labels.append(f"{name}, {player[0]}")
+                    if typep == "ppg":
+                        points.append(player[1][0])
+                    elif typep == "bpg":
+                        points.append(player[1][1])
+                    elif typep == "rbg":
+                        points.append(player[1][2])
+    plt.xlabel("Players")
+    if typep == "ppg":
+        plt.ylabel("Points")
+    elif typep == "bpg":
+        plt.ylabel("Blocks")
+    elif typep == "rbg":
+        plt.ylabel("Rebounds")
+    plt.figure(figsize=(16,18)) # made so big because if not the names will not be shown in the picture
+    plt.bar(range(len(points)), points)
+    plt.xticks(range(len(points)), labels, rotation=90)
     
-                
+    plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png")
+    plt.close()  
     
     
-    
-
-
-
 resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')
-
+team_names = []
 team_list = extract_url(resp)
 team_players = extract_player_url(team_list)
+
 for team in team_players:
     team_names.append(team)
-    # print(team)
 
-i = 0
 for team in team_players:
     stats = []
     for player in team_players[team]:
         stat = extract_player_statistics(player)
-        if stat[1] != []:
+        if stat[1] != []: # used to filter out the players that doesnt have stats for that season
             stats.append(stat)
-        print(stat)
-    
     team_players[team] = stats
-
-
     
     
 top_players_ppg = []
 top_players_bpg = []
 top_players_rbg = []
+"""
+This sorts the players after the spesific stats required
+"""
 for team in team_players:
     team_players[team].sort(reverse=True, key=lambda x: x[1][0])
     top_players_ppg.append({team: team_players[team][:3]})
-print(top_players_ppg)
-    
-print("\n")
+
 for team in team_players:
     team_players[team].sort(reverse=True, key=lambda x: x[1][1])
     top_players_bpg.append({team: team_players[team][:3]})
-print(top_players_bpg)
-print("\n")
+
 for team in team_players:
     team_players[team].sort(reverse=True, key=lambda x: x[1][2])
     top_players_rbg.append({team: team_players[team][:3]})
-print(top_players_rbg)
+
+plot(top_players_ppg, "ppg")
+plot(top_players_bpg, "bpg")
+plot(top_players_rbg, "rbg")
 
 
 

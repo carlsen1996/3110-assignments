@@ -19,7 +19,7 @@ def find_urls(url):
         with a link to the other articles
     """
     resp = req.get(url)
-    regex = r'((?<=\")[\w:/.]*(wikipedia.org)?\/wiki\/[\w()/%]+(?=\"|#))'
+    regex = r'((?<=\")[\w:/.]*(wikipedia.org)?\/wiki\/[\w()/%]+(?=\"|#))' #how this works described in the README
     matches = re.findall(regex, resp.text)
     return matches
 

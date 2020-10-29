@@ -152,9 +152,10 @@ def plot(top_players, typep):
         plt.ylabel("Blocks")
     elif typep == "rbg":
         plt.ylabel("Rebounds")
-    plt.figure(figsize=(16,18)) # made so big because if not the names will not be shown in the picture
+    
     plt.bar(range(len(points)), points)
     plt.xticks(range(len(points)), labels, rotation=90)
+    plt.tight_layout()
     
     plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png")
     plt.close()  

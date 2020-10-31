@@ -161,7 +161,6 @@ def plot(top_players, typep):
     elif typep == "rbg":
         plt.ylabel("Rebounds")
     
-
     plt.xticks(range(len(all_points)), labels, rotation=90)
     plt.legend(title="Teams:", loc="lower left", bbox_to_anchor=(1, 0))
     plt.tight_layout()
@@ -176,6 +175,7 @@ def main():
     stats_file = "NBA_player_statistics/stats.json"
     if os.path.exists(stats_file):
         team_players = json.load(open(stats_file))
+        print("Loaded stats from file:", stats_file)
     else:
 
         resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')

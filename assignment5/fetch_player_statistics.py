@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests as req
 import matplotlib.pyplot as plt
+import json
+import os
 """
 This program will take use a wikipedia article about a season of the NBA playoffs 
 and find all the teams in the conference semifinals. Then it will find all the 
@@ -132,19 +134,25 @@ def plot(top_players, typep):
     returns: 
         None
     """
-    points = []
+
     labels = []
+    all_points = []
     for team_stat in top_players:
         for name in team_stat:
+            points = []
             for players in team_stat.values():
                 for player in players:
-                    labels.append(f"{name}, {player[0]}")
+                    labels.append(f"{player[0]}")
                     if typep == "ppg":
                         points.append(player[1][0])
                     elif typep == "bpg":
                         points.append(player[1][1])
                     elif typep == "rbg":
                         points.append(player[1][2])
+
+            all_points.extend(points)
+            plt.bar(range(len(all_points) - len(points), len(all_points)), points, label=name)
+
     plt.xlabel("Players")
     if typep == "ppg":
         plt.ylabel("Points")
@@ -153,31 +161,40 @@ def plot(top_players, typep):
     elif typep == "rbg":
         plt.ylabel("Rebounds")
     
-    plt.bar(range(len(points)), points)
-    plt.xticks(range(len(points)), labels, rotation=90)
+
+    plt.xticks(range(len(all_points)), labels, rotation=90)
+    plt.legend(title="Teams:", loc="lower left", bbox_to_anchor=(1, 0))
     plt.tight_layout()
     
-    plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png")
+    plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png", bbox_inches='tight')
+
+    plt.show()
     plt.close()  
     
 
 def main():
-    resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')
-    team_names = []
-    team_list = extract_url(resp)
-    team_players = extract_player_url(team_list)
+    stats_file = "NBA_player_statistics/stats.json"
+    if os.path.exists(stats_file):
+        team_players = json.load(open(stats_file))
+    else:
 
-    for team in team_players:
-        team_names.append(team)
+        resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')
+        team_names = []
+        team_list = extract_url(resp)
+        team_players = extract_player_url(team_list)
 
-    for team in team_players:
-        stats = []
-        for player in team_players[team]:
-            stat = extract_player_statistics(player)
-            if stat[1] != []: # used to filter out the players that doesnt have stats for that season
-                stats.append(stat)
-        team_players[team] = stats
+        for team in team_players:
+            team_names.append(team)
 
+        for team in team_players:
+            stats = []
+            for player in team_players[team]:
+                stat = extract_player_statistics(player)
+                if stat[1] != []: # used to filter out the players that doesnt have stats for that season
+                    stats.append(stat)
+            team_players[team] = stats
+
+        json.dump(team_players, open(stats_file, 'w'))
 
     top_players_ppg = []
     top_players_bpg = []

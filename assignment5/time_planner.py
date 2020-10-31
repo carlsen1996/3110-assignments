@@ -71,13 +71,29 @@ def extract_events(url):
     return table_list
 
 def get_captions(table):
-    captions = table.find('caption').text
-    print(captions)
+    """
+    Take a bs4 table as input, returning a dictionary of discipline codes mapped to discipline names
 
+    parameters:
+        table (bs4.element.Tag): Table containing the captions
+
+    returns:
+        dict: Dictionary mapping discipline codes to names
+    """
+    captions = table.find('caption')
+    if not captions:
+        return
+
+    captions = captions.text
+    #print(captions)
+
+    # find captured group containing 2 uppercase letters, followed by whitespace, '-' and more whitespace
+    # then another captured group that contains one or more non-capturing group of one word
+    # (several letters followed by non-greedy whitespace), ending on a comma or end of line
     pattern = r"([A-Z]{2})\s–\s((?:\w+\s??)+?)(?:,|$)"
-    print (re.findall(pattern, captions))
+    #print (re.findall(pattern, captions))
     res = {match[0]: match[1] for match in re.findall(pattern, captions)}
-    print(res)
+    #print(res)
     return res
 
             

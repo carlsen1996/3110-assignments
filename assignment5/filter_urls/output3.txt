@@ -1,5 +1,4 @@
-//en.m.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup
-https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup
+https://en.m.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cuphttps://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup
 https://www.wikipedia.org/wiki/Norway
 https://www.wikipedia.org/wiki/Aleksander_Aamodt_Kilde
 https://www.wikipedia.org/wiki/Italy
@@ -755,6 +754,8 @@ https://www.wikipedia.org/wiki/Finland
 https://www.wikipedia.org/wiki/Austria
 https://www.wikipedia.org/wiki/United_States
 https://www.wikipedia.org/wiki/Wiley_Maple
+https://www.wikipedia.org/wiki/Norway
+https://www.wikipedia.org/wiki/Marcus_Monsen
 https://www.wikipedia.org/wiki/Sweden
 https://www.wikipedia.org/wiki/Andr%C3%A9_Myhrer
 https://www.wikipedia.org/wiki/Sweden
@@ -918,7 +919,5 @@ https://ru.wikipedia.org/wiki/%D0%9A%D1%83%D0%B1%D0%BE%D0%BA_%D0%BC%D0%B8%D1%80%
 https://sl.wikipedia.org/wiki/Svetovni_pokal_v_alpskem_smu%C4%8Danju_2020
 https://fi.wikipedia.org/wiki/Alppihiihdon_maailmancup_2019%E2%80%932020
 https://sv.wikipedia.org/wiki/V%C3%A4rldscupen_i_alpin_skid%C3%A5kning_2019/2020
-//foundation.wikimedia.org/wiki/Terms_of_Use
-//foundation.wikimedia.org/wiki/Privacy_policy
-https://foundation.wikimedia.org/wiki/Privacy_policy
+https://foundation.wikimedia.org/wiki/Terms_of_Usehttps://foundation.wikimedia.org/wiki/Privacy_policyhttps://foundation.wikimedia.org/wiki/Privacy_policy
 https://foundation.wikimedia.org/wiki/Cookie_statement

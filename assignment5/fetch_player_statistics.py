@@ -149,7 +149,7 @@ def plot(top_players, typep):
                         points.append(player[1][1])
                     elif typep == "rbg":
                         points.append(player[1][2])
-
+        # for each team, add the points to the bar plot with the team label in order to get teams grouped by color
             all_points.extend(points)
             plt.bar(range(len(all_points) - len(points), len(all_points)), points, label=name)
 

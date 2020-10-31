@@ -160,55 +160,47 @@ def plot(top_players, typep):
     plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png")
     plt.close()  
     
-    
-resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')
-team_names = []
-team_list = extract_url(resp)
-team_players = extract_player_url(team_list)
 
-for team in team_players:
-    team_names.append(team)
+def main():
+    resp = req.get('https://en.wikipedia.org/wiki/2020_NBA_playoffs')
+    team_names = []
+    team_list = extract_url(resp)
+    team_players = extract_player_url(team_list)
 
-for team in team_players:
-    stats = []
-    for player in team_players[team]:
-        stat = extract_player_statistics(player)
-        if stat[1] != []: # used to filter out the players that doesnt have stats for that season
-            stats.append(stat)
-    team_players[team] = stats
-    
-    
-top_players_ppg = []
-top_players_bpg = []
-top_players_rbg = []
-"""
-This sorts the players after the spesific stats required
-"""
-for team in team_players:
-    team_players[team].sort(reverse=True, key=lambda x: x[1][0])
-    top_players_ppg.append({team: team_players[team][:3]})
+    for team in team_players:
+        team_names.append(team)
 
-for team in team_players:
-    team_players[team].sort(reverse=True, key=lambda x: x[1][1])
-    top_players_bpg.append({team: team_players[team][:3]})
-
-for team in team_players:
-    team_players[team].sort(reverse=True, key=lambda x: x[1][2])
-    top_players_rbg.append({team: team_players[team][:3]})
-
-plot(top_players_ppg, "ppg")
-plot(top_players_bpg, "bpg")
-plot(top_players_rbg, "rbg")
+    for team in team_players:
+        stats = []
+        for player in team_players[team]:
+            stat = extract_player_statistics(player)
+            if stat[1] != []: # used to filter out the players that doesnt have stats for that season
+                stats.append(stat)
+        team_players[team] = stats
 
 
+    top_players_ppg = []
+    top_players_bpg = []
+    top_players_rbg = []
+    """
+    This sorts the players after the spesific stats required
+    """
+    for team in team_players:
+        team_players[team].sort(reverse=True, key=lambda x: x[1][0])
+        top_players_ppg.append({team: team_players[team][:3]})
 
-        
-    
+    for team in team_players:
+        team_players[team].sort(reverse=True, key=lambda x: x[1][1])
+        top_players_bpg.append({team: team_players[team][:3]})
+
+    for team in team_players:
+        team_players[team].sort(reverse=True, key=lambda x: x[1][2])
+        top_players_rbg.append({team: team_players[team][:3]})
+
+    plot(top_players_ppg, "ppg")
+    plot(top_players_bpg, "bpg")
+    plot(top_players_rbg, "rbg")
 
 
-
-    
-
-
-    
-#4 6 16 18 28 30 40 42
+if __name__ == '__main__':
+    main()

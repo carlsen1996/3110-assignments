@@ -38,15 +38,16 @@ def write_f(matches, file):
         else:
             file.write(f"{match[0]}\n")
 
-matches1 = find_urls("https://en.wikipedia.org/wiki/Nobel_Prize")
-matches2 = find_urls("https://en.wikipedia.org/wiki/Bundesliga")
-matches3 = find_urls("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
-file1 = open("./filter_urls/output1.txt", "w+")
-file2 = open("./filter_urls/output2.txt", "w+")
-file3 = open("./filter_urls/output3.txt", "w+")
-write_f(matches1, file1)
-write_f(matches2, file2)
-write_f(matches3, file3)
+def main():
+    matches1 = find_urls("https://en.wikipedia.org/wiki/Nobel_Prize")
+    matches2 = find_urls("https://en.wikipedia.org/wiki/Bundesliga")
+    matches3 = find_urls("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
+    file1 = open("./filter_urls/output1.txt", "w+")
+    file2 = open("./filter_urls/output2.txt", "w+")
+    file3 = open("./filter_urls/output3.txt", "w+")
+    write_f(matches1, file1)
+    write_f(matches2, file2)
+    write_f(matches3, file3)
 
-
-
+if __name__ == '__main__':
+    main()

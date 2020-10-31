@@ -86,13 +86,14 @@ def make_table(table_list):
         f.write(f"{row[0]} | {row[1]} | {row[2]} | \n")
     
 
+def main():
+    resp = req.get("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
+    resp1 = req.get("https://en.wikipedia.org/wiki/2020%E2%80%9321_FIS_Alpine_Ski_World_Cup")
 
 
-resp = req.get("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
-resp1 = req.get("https://en.wikipedia.org/wiki/2020%E2%80%9321_FIS_Alpine_Ski_World_Cup")
+    table_list = extract_events(resp1)
+    make_table(table_list)
 
 
-table_list = extract_events(resp1)
-make_table(table_list)
-
-
+if __name__ == '__main__':
+    main()

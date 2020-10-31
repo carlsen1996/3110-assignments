@@ -32,14 +32,20 @@ def write_f(matches, filename):
         matches (List): A list of tuples that have a string of the url to a new article.
         filename (str): A .txt file that will be written to.
     """
+    written_urls = set()
+
     with open(filename, 'w+') as file:
         for match in matches:
             if match[0].startswith("/wiki/"):
-                file.write(f"https://www.wikipedia.org{match[0]}\n")
+                url = f"https://www.wikipedia.org{match[0]}\n"
             elif match[0].startswith(r"//"):
-                file.write("https:" + match[0])
+                url = "https:" + match[0] + "\n"
             else:
-                file.write(f"{match[0]}\n")
+                url = f"{match[0]}\n"
+
+            if url not in written_urls:
+                file.write(url)
+                written_urls.add(url)
 
 def main():
     matches1 = find_urls("https://en.wikipedia.org/wiki/Nobel_Prize")

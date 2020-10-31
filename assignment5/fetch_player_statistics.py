@@ -167,7 +167,7 @@ def plot(top_players, typep):
     
     plt.savefig(f"./NBA_player_statistics/players_over_{typep}.png", bbox_inches='tight')
 
-    plt.show()
+    #plt.show()
     plt.close()  
     
 

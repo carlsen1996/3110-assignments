@@ -1,41 +1,41 @@
 Date | Venue | Dicipline | Winner 
 --- | --- | --- | ---
-18 October 2020 | Sölden | GS | 
-14 November 2020 | Lech | PG | 
-5 December 2020 | Val-d'Isère | GS | 
-6 December 2020 | Val-d'Isère | GS | 
-12 December 2020 | Val-d'Isère | DH | 
-13 December 2020 | Val-d'Isère | SG | 
-18 December 2020 | Val Gardena/Gröden | SG | 
-19 December 2020 | Val Gardena/Gröden | DH | 
-20 December 2020 | Alta Badia | GS | 
-21 December 2020 | Alta Badia | SL | 
-22 December 2020 | Madonna di Campiglio | SL | 
-28 December 2020 | Bormio | DH | 
-29 December 2020 | Bormio | SG | 
-6 January 2021 | Zagreb | SL | 
-8 January 2021 | Adelboden | GS | 
-9 January 2021 | Adelboden | GS | 
-10 January 2021 | Adelboden | SL | 
-15 January 2021 | Wengen | DH | 
-16 January 2021 | Wengen | DH | 
-17 January 2021 | Wengen | SL | 
-22 January 2021 | Kitzbühel | SG | 
-23 January 2021 | Kitzbühel | DH | 
-24 January 2021 | Kitzbühel | SL | 
-26 January 2021 | Schladming | SL | 
-30 January 2021 | Chamonix | SL | 
-31 January 2021 | Chamonix | SL | 
-5 February 2021 | Garmisch-Partenkirchen | SG | 
-6 February 2021 | Garmisch-Partenkirchen | DH | 
-6 February 2021 | Garmisch-Partenkirchen | DH | 
-27 February 2021 | Bansko | GS | 
-28 February 2021 | Bansko | GS | 
-6 March 2021 | Kvitfjell | DH | 
-7 March 2021 | Kvitfjell | SG | 
-13 March 2021 | Kranjska Gora | GS | 
-14 March 2021 | Kranjska Gora | SL | 
-17 March 2021 | Lenzerheide | DH | 
-18 March 2021 | Lenzerheide | SG | 
-20 March 2021 | Lenzerheide | GS | 
-21 March 2021 | Lenzerheide | SL | 
+18 October 2020 | Sölden | Giant Slalom | 
+14 November 2020 | Lech | Parallel Giant Slalom | 
+5 December 2020 | Val-d'Isère | Giant Slalom | 
+6 December 2020 | Val-d'Isère | Giant Slalom | 
+12 December 2020 | Val-d'Isère | Downhill | 
+13 December 2020 | Val-d'Isère | Super Giant Slalom | 
+18 December 2020 | Val Gardena/Gröden | Super Giant Slalom | 
+19 December 2020 | Val Gardena/Gröden | Downhill | 
+20 December 2020 | Alta Badia | Giant Slalom | 
+21 December 2020 | Alta Badia | Slalom | 
+22 December 2020 | Madonna di Campiglio | Slalom | 
+28 December 2020 | Bormio | Downhill | 
+29 December 2020 | Bormio | Super Giant Slalom | 
+6 January 2021 | Zagreb | Slalom | 
+8 January 2021 | Adelboden | Giant Slalom | 
+9 January 2021 | Adelboden | Giant Slalom | 
+10 January 2021 | Adelboden | Slalom | 
+15 January 2021 | Wengen | Downhill | 
+16 January 2021 | Wengen | Downhill | 
+17 January 2021 | Wengen | Slalom | 
+22 January 2021 | Kitzbühel | Super Giant Slalom | 
+23 January 2021 | Kitzbühel | Downhill | 
+24 January 2021 | Kitzbühel | Slalom | 
+26 January 2021 | Schladming | Slalom | 
+30 January 2021 | Chamonix | Slalom | 
+31 January 2021 | Chamonix | Slalom | 
+5 February 2021 | Garmisch-Partenkirchen | Super Giant Slalom | 
+6 February 2021 | Garmisch-Partenkirchen | Downhill | 
+6 February 2021 | Garmisch-Partenkirchen | Downhill | 
+27 February 2021 | Bansko | Giant Slalom | 
+28 February 2021 | Bansko | Giant Slalom | 
+6 March 2021 | Kvitfjell | Downhill | 
+7 March 2021 | Kvitfjell | Super Giant Slalom | 
+13 March 2021 | Kranjska Gora | Giant Slalom | 
+14 March 2021 | Kranjska Gora | Slalom | 
+17 March 2021 | Lenzerheide | Downhill | 
+18 March 2021 | Lenzerheide | Super Giant Slalom | 
+20 March 2021 | Lenzerheide | Giant Slalom | 
+21 March 2021 | Lenzerheide | Slalom | 

@@ -24,29 +24,39 @@ def find_urls(url):
     return matches
 
 
-def write_f(matches, file):
+def write_f(matches, filename):
     """
     This function will take in a list of matches and a file to write the list in to.
 
     parameters:
         matches (List): A list of tuples that have a string of the url to a new article.
-        file (File): A .txt file that will be written to.
+        filename (str): A .txt file that will be written to.
     """
-    for match in matches:
-        if match[0].startswith("/wiki/"):
-            file.write(f"https://www.wikipedia.org{match[0]}\n")
-        else:
-            file.write(f"{match[0]}\n")
+    written_urls = set()
 
-matches1 = find_urls("https://en.wikipedia.org/wiki/Nobel_Prize")
-matches2 = find_urls("https://en.wikipedia.org/wiki/Bundesliga")
-matches3 = find_urls("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
-file1 = open("./filter_urls/output1.txt", "w+")
-file2 = open("./filter_urls/output2.txt", "w+")
-file3 = open("./filter_urls/output3.txt", "w+")
-write_f(matches1, file1)
-write_f(matches2, file2)
-write_f(matches3, file3)
+    with open(filename, 'w+') as file:
+        for match in matches:
+            if match[0].startswith("/wiki/"):
+                url = f"https://www.wikipedia.org{match[0]}\n"
+            elif match[0].startswith(r"//"):
+                url = "https:" + match[0] + "\n"
+            else:
+                url = f"{match[0]}\n"
 
+            if url not in written_urls:
+                file.write(url)
+                written_urls.add(url)
 
+def main():
+    matches1 = find_urls("https://en.wikipedia.org/wiki/Nobel_Prize")
+    matches2 = find_urls("https://en.wikipedia.org/wiki/Bundesliga")
+    matches3 = find_urls("https://en.wikipedia.org/wiki/2019%E2%80%9320_FIS_Alpine_Ski_World_Cup")
+    file1 = "./filter_urls/output1.txt"
+    file2 = "./filter_urls/output2.txt"
+    file3 = "./filter_urls/output3.txt"
+    write_f(matches1, file1)
+    write_f(matches2, file2)
+    write_f(matches3, file3)
 
+if __name__ == '__main__':
+    main()

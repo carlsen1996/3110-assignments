@@ -1,10 +1,19 @@
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+@app.after_request
+def add_header(response):
+    response.cache_control.no_store = True
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response
 
 def plot_reported_cases(s):
     reported = s["Nye tilfeller"]
@@ -19,6 +28,7 @@ def plot_reported_cases(s):
     plt.xticks(range(len(date)), date[::round(len(date) / 10)], rotation=90, size=7)
     plt.locator_params(axis='x', nbins=10)
     plt.tight_layout()
+    
     plt.savefig("static/reports.png")
     plt.close()
 
@@ -61,6 +71,19 @@ def plot_both(s):
     fig.tight_layout()
     fig.savefig("static/both.png")
     plt.close()
+
+@app.route("/", methods=["POST"])
+def update():
+    counties = ["AlleFylker.csv", "Agder.csv", "Innlandet.csv", "MoreOgRomsdal.csv", "Nordland.csv", "Oslo.csv", "Rogaland.csv", "TromsOgFinnmark.csv", "Trondelag.csv", "VestfoldOgTelemark.csv", "Vestland.csv", "Viken.csv"]
+    county = request.form.get("county")
+    s = pd.read_csv(county)
+    s.Dato = pd.to_datetime(s.Dato, dayfirst=True)
+    plot_cumulative_cases(s)
+    plot_reported_cases(s)
+    plot_both(s)
+    return render_template('home.html', counties=counties)
+
+    
 
 
 
